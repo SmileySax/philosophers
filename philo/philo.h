@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:55:12 by keaton            #+#    #+#             */
-/*   Updated: 2022/06/28 17:24:12 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:21:07 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pinfo{
 	pthread_mutex_t	mt_lock;
 	int				ph_nbr;
 	struct timeval	last_meal;
+	struct timeval	start_time;
 	int				meals;
 }				t_pinfo;
 

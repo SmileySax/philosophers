@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:54:47 by keaton            #+#    #+#             */
-/*   Updated: 2022/06/29 15:39:30 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:19:01 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_death(t_pinfo *pinfo, int i, int *n)
 	*n = pinfo[i].meals;
 	if (((now.tv_sec - pinfo[i].last_meal.tv_sec) * 1000
 			+ (now.tv_usec - pinfo[i].last_meal.tv_usec) / 1000)
-		> pinfo[i].info[1] && *n != pinfo[i].info[4])
+		> pinfo[i].info[1] && ((*n < pinfo[i].info[4]) || !(pinfo[i].info[4])))
 	{
 		pthread_mutex_unlock(&(pinfo[i].mt_lock));
 		ft_report("died", pinfo + i);

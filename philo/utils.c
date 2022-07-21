@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:55:17 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 11:18:34 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:17:24 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	ft_check_info(int *info, int flag)
 		return (0);
 	}
 	i = 0;
-	while (i++ < 4)
-		if (info[i - 1] < 0)
+	while (i < 5)
+		if (info[i++] < 0)
 			return (ft_check_info(info, 1));
 	return (1);
 }

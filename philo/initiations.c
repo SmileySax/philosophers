@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:55:03 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 17:50:16 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:27:34 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	ft_init_times(t_pinfo *pinfo)
 	i = 0;
 	n_of_philos = pinfo->info[0];
 	while (i < n_of_philos)
-		gettimeofday(&(pinfo[i++].last_meal), 0);
+	{
+		gettimeofday(&(pinfo[i].last_meal), 0);
+		gettimeofday(&(pinfo[i++].start_time), 0);
+	}
 }
 
 void	ft_pinfo_init(t_pinfo *pinfo, int n, int *info, t_dead *dead)
