@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:33:54 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 22:08:12 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:13:55 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_report(const char *words, t_pinfo *pinfo, int stop)
 	gettimeofday(&t, 0);
 	sem_wait(pinfo->sem_report);
 	delta = (t.tv_sec - pinfo->start_time.tv_sec) * 1000
-			+ (t.tv_usec - pinfo->start_time.tv_usec) / 1000;
+		+ (t.tv_usec - pinfo->start_time.tv_usec) / 1000;
 	printf("%dms %d %s\n", delta, pinfo->ph_nbr, words);
 	if (!stop)
 		sem_post(pinfo->sem_report);
