@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:33:54 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 18:00:36 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:08:12 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void	ft_report(const char *words, t_pinfo *pinfo, int stop)
 {
 	struct timeval	t;
+	int				delta;
 
 	gettimeofday(&t, 0);
 	sem_wait(pinfo->sem_report);
-	printf("%d %d %s\n", t.tv_usec / 1000, pinfo->ph_nbr, words);
+	delta = (t.tv_sec - pinfo->start_time.tv_sec) * 1000
+			+ (t.tv_usec - pinfo->start_time.tv_usec) / 1000;
+	printf("%dms %d %s\n", delta, pinfo->ph_nbr, words);
 	if (!stop)
 		sem_post(pinfo->sem_report);
 }
@@ -27,7 +30,8 @@ void	ft_eat(t_pinfo *pinfo)
 {
 	struct timeval	t;
 
-	sem_wait(pinfo->sem_possible);
+	if ((pinfo->info)[0] > 1)
+		sem_wait(pinfo->sem_possible);
 	sem_wait(pinfo->sem_fork);
 	ft_report("has taken left fork", pinfo, 0);
 	sem_wait(pinfo->sem_fork);
@@ -46,7 +50,8 @@ void	ft_eat(t_pinfo *pinfo)
 	sem_post(pinfo->sem_fork);
 	ft_report("returned right fork", pinfo, 0);
 	sem_post(pinfo->sem_fork);
-	sem_post(pinfo->sem_possible);
+	if ((pinfo->info)[0] > 1)
+		sem_post(pinfo->sem_possible);
 	ft_report("returned left fork", pinfo, 0);
 }
 
@@ -59,8 +64,8 @@ int	ft_check_death(t_pinfo *pinfo)
 	pthread_mutex_lock(&(pinfo->lock_mt));
 	n = pinfo->meals;
 	if (((now.tv_sec - (pinfo->last_meal).tv_sec) * 1000
-			+ (now.tv_usec - (pinfo->last_meal).tv_usec)
-			/ 1000) > pinfo->info[1] && n < pinfo->info[4])
+			+ (now.tv_usec - (pinfo->last_meal).tv_usec) / 1000)
+		> pinfo->info[1] && (n < pinfo->info[4] || !(pinfo->info[4])))
 	{
 		pthread_mutex_unlock(&(pinfo->lock_mt));
 		return (1);

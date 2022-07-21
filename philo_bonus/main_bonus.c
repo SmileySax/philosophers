@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:33:47 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 18:00:48 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:09:16 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_philo(t_pinfo pinfo, int i)
 	pthread_t	monitor;
 
 	pinfo.ph_nbr = i;
-	ft_report("started", &pinfo, 0);
 	if (pthread_create(&monitor, NULL, monitoring, (void *)(&pinfo)) != 0)
 		exit(1);
+	gettimeofday(&(pinfo.start_time), 0);
 	gettimeofday(&(pinfo.last_meal), 0);
 	while (1)
 	{

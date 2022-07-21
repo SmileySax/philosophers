@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:54:47 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 21:19:01 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:59:35 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	*ft_philo(void *pinfo)
 		ft_usleep(philo->info[2] * 1000 + 1000 * philo->info[0] / 5);
 	else if (philo->ph_nbr % 2 != 0 && philo->info[2] >= philo->info[1])
 		ft_usleep(philo->info[1] * 1000 + 1000 * philo->info[0] / 5);
-	ft_report("is ready", philo);
 	while (1)
 	{
 		if (philo->ph_nbr % 2 == 0)

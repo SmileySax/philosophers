@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:37:27 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 18:01:06 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:43:12 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_pinfo{
 	int				meals;
 	int				*pid;
 	struct timeval	last_meal;
+	struct timeval	start_time;
 }				t_pinfo;
 
 int		ft_close_sems(t_pinfo *pinfo);
