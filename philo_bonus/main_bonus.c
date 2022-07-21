@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:33:47 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 22:09:16 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:22:51 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_philo(t_pinfo pinfo, int i)
 {
 	pthread_t	monitor;
 
-	pinfo.ph_nbr = i;
+	pinfo.ph_nbr = i + 1;
 	if (pthread_create(&monitor, NULL, monitoring, (void *)(&pinfo)) != 0)
 		exit(1);
 	gettimeofday(&(pinfo.start_time), 0);

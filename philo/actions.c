@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:54:57 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 21:38:01 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:29:17 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ void	ft_lets_eat(t_pinfo	*pinfo, pthread_mutex_t **spoons)
 	ft_philo_died(pinfo);
 	d = -1;
 	if (pinfo->info[0] == 1)
+	{
 		pthread_detach(pinfo[0].id);
+		ft_usleep(pinfo->info[1] + 3000);
+	}
 	else
 		while (++d < pinfo->info[0])
 			pthread_join(pinfo[d].id, &ret);

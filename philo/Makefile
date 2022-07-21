@@ -6,7 +6,7 @@
 #    By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 00:58:37 by keaton            #+#    #+#              #
-#    Updated: 2022/06/28 22:37:22 by keaton           ###   ########.fr        #
+#    Updated: 2022/07/21 22:31:07 by keaton           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC			=	main.c	destructors.c	actions.c\
 				utils.c	initiations.c
 OBJ			=	$(SRC:.c=.o)
 HEADER		=	philo.h
-CC_FLAGS	=	-pthread -Wall -Werror -Wextra -fsanitize=thread -g
+CC_FLAGS	=	-pthread -Wall -Werror -Wextra #-fsanitize=thread -g
 NAME		=	philo
 RM			=	rm -rf
 
