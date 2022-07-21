@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:37:27 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 21:43:12 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 23:15:59 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_pinfo{
 	int				full;
 	sem_t			*sem_fork;
 	sem_t			*sem_possible;
-	pthread_mutex_t	lock_mt;
-	pthread_mutex_t	lock_full;
+	sem_t			**sem_mt;
+	sem_t			*sem_full;
 	sem_t			*sem_report;
 	int				ph_nbr;
 	int				meals;

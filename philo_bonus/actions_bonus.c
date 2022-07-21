@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:33:54 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 22:21:16 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/21 23:38:04 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	ft_eat(t_pinfo *pinfo)
 	ft_report("has taken right fork", pinfo, 0);
 	ft_report("is eating", pinfo, 0);
 	gettimeofday(&t, 0);
-	pthread_mutex_lock(&(pinfo->lock_mt));
+	sem_wait(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 	(pinfo->last_meal).tv_sec = t.tv_sec;
 	(pinfo->last_meal).tv_usec = t.tv_usec;
 	pinfo->meals++;
-	pthread_mutex_unlock(&(pinfo->lock_mt));
+	sem_post(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 	if (pinfo->info[1] < pinfo->info[2])
 		ft_usleep(pinfo->info[1] * 1000);
 	else
@@ -61,17 +61,17 @@ int	ft_check_death(t_pinfo *pinfo)
 	int				n;
 
 	gettimeofday(&now, 0);
-	pthread_mutex_lock(&(pinfo->lock_mt));
+	sem_wait(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 	n = pinfo->meals;
 	if (((now.tv_sec - (pinfo->last_meal).tv_sec) * 1000
 			+ (now.tv_usec - (pinfo->last_meal).tv_usec) / 1000)
 		> pinfo->info[1] && (n < pinfo->info[4] || !(pinfo->info[4])))
 	{
-		pthread_mutex_unlock(&(pinfo->lock_mt));
+		sem_post(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 		return (1);
 	}
 	else
-		pthread_mutex_unlock(&(pinfo->lock_mt));
+		sem_post(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 	return (0);
 }
 
@@ -88,31 +88,32 @@ void	*monitoring(void *arg)
 			ft_report("died", pinfo, 1);
 			exit(1);
 		}
-		pthread_mutex_lock(&(pinfo->lock_mt));
+		sem_wait(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 		if (pinfo->info[4] && pinfo->meals >= pinfo->info[4])
 		{
-			pthread_mutex_unlock(&(pinfo->lock_mt));
+			sem_post(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 			ft_report("is full", pinfo, 0);
-			pthread_mutex_lock(&(pinfo->lock_full));
+			sem_wait(pinfo->sem_full);
 			pinfo->full = 1;
-			pthread_mutex_unlock(&(pinfo->lock_full));
+			sem_post(pinfo->sem_full);
 			break ;
 		}
 		else
-			pthread_mutex_unlock(&(pinfo->lock_mt));
+			sem_post(pinfo->sem_mt[pinfo->ph_nbr - 1]);
 	}
 	return (arg);
 }
 
 int	ft_sleep_n_think(t_pinfo *pinfo)
 {
-	pthread_mutex_lock(&(pinfo->lock_full));
+	sem_wait(pinfo->sem_full);
 	if (pinfo->full)
 	{
-		pthread_mutex_unlock(&(pinfo->lock_full));
+		sem_post(pinfo->sem_full);
 		return (1);
 	}
-	pthread_mutex_unlock(&(pinfo->lock_full));
+	else
+		sem_post(pinfo->sem_full);
 	ft_report("is sleeping", pinfo, 0);
 	if ((pinfo->info)[1] <= (pinfo->info)[2] + (pinfo->info)[3])
 		return (1);

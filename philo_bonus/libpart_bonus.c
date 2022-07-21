@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:37:17 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 17:37:20 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/22 00:15:06 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ void	ft_writenum(int n, char *num, int len)
 		ft_writenum (n / 10, num, len);
 }
 
-char	*ft_itoa(unsigned int n, char *num)
+void	ft_itoa(unsigned int n, char *num)
 {
 	int		len;
 
 	len = ft_deccount(n);
-	num[len] = '\0';
-	ft_writenum(n, num, len - 1);
-	return (num);
+	num[len + 2] = '\0';
+	num[0] = 'm';
+	num[1] = 't';
+	ft_writenum(n, num, len + 1);
 }
