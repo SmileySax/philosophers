@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:54:57 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 22:29:17 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/22 13:08:50 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_eat_even(t_pinfo *pinfo)
 {
 	struct timeval	t;
 
+	if (pinfo->info[0] % 2 == 1)
+		ft_usleep(500);
 	pthread_mutex_lock(pinfo->right_f);
 	ft_report("has taken right fork", pinfo);
 	pthread_mutex_lock(pinfo->left_f);
