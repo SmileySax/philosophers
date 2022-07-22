@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:55:03 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 21:27:34 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/22 13:29:30 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_dead	**ft_fill_dead(t_dead **dead)
 	if (!(*dead))
 		return (NULL);
 	pthread_mutex_init(&((*dead)->deadlock), 0);
-	pthread_mutex_init(&((*dead)->report), 0);
 	(*dead)->flag = 0;
 	return (dead);
 }

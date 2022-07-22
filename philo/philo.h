@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:55:12 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/21 21:21:07 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/22 13:29:38 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 typedef struct s_dead{
 	pthread_mutex_t	deadlock;
-	pthread_mutex_t	report;
 	int				flag;
 }				t_dead;
 

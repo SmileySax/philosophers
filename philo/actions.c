@@ -6,7 +6,7 @@
 /*   By: keaton <keaton@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:54:57 by keaton            #+#    #+#             */
-/*   Updated: 2022/07/22 13:08:50 by keaton           ###   ########.fr       */
+/*   Updated: 2022/07/22 13:30:05 by keaton           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@ void	ft_report(const char *words, t_pinfo *pinfo)
 	pthread_mutex_lock(&(pinfo->dead->deadlock));
 	if (!pinfo->dead->flag)
 	{
-		pthread_mutex_unlock(&(pinfo->dead->deadlock));
 		gettimeofday(&t, 0);
 		delta = (t.tv_sec - pinfo->start_time.tv_sec) * 1000
 			+ (t.tv_usec - pinfo->start_time.tv_usec) / 1000;
-		pthread_mutex_lock(&(pinfo->dead->report));
 		printf("%dms %d %s\n", delta, pinfo->ph_nbr, words);
-		pthread_mutex_unlock(&(pinfo->dead->report));
 	}
-	else
-		pthread_mutex_unlock(&(pinfo->dead->deadlock));
+	pthread_mutex_unlock(&(pinfo->dead->deadlock));
 }
 
 void	ft_eat_odd(t_pinfo *pinfo)
